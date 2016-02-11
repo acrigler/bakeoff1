@@ -130,10 +130,12 @@ void drawButton(int i)
     fill(255);
     text(trials.get(trialNum + 1) % 4 + 1, bounds.x+bounds.width/2, bounds.y+bounds.height/2 + 16); 
   }
-  else
+  else {
     fill(200); // if not, fill gray
     rect(bounds.x, bounds.y, bounds.width, bounds.height); //draw button
+  }
 
+  textSize(14);
   
 }
 
@@ -141,12 +143,12 @@ void drawButton(int i)
  * Draw an arrow stretching from the center of the current square to the next square
  */
 void drawArrow(float x1, float y1, float x2, float y2) {
-  float len = sqrt(pow((x2-x1),2) + pow((y2-y1),2)) - buttonSize;
-  float angle = atan2(y2 - y1, x2 - x1);
+  //float len = sqrt(pow((x2-x1),2) + pow((y2-y1),2)) - buttonSize;
+  //float angle = atan2(y2 - y1, x2 - x1);
   float radius = buttonSize / 2;
-  float cx1 = x1 + radius * sin(angle);
-  float cy1 = y1 + radius * cos(angle);
-  float triangleSize = 5;
+  //float cx1 = x1 + radius * sin(angle);
+  //float cy1 = y1 + radius * cos(angle);
+  //float triangleSize = 5;
 
   strokeWeight(2);
   stroke(255,0,0);
