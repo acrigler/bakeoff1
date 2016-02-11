@@ -143,8 +143,8 @@ void drawButton(int i)
     y1 = bounds.y;
   }
   else if (trialNum + 1 < 16 && trials.get(trialNum + 1) == i) { // upcoming target
-    //fill(200);
-    fill(0, 255, 255, 80);
+    fill(200);
+    //fill(0, 255, 255);
     x2 = bounds.x; // set x and y of arrow end
     y2 = bounds.y;
   }
@@ -167,19 +167,38 @@ void drawArrow(float x1, float y1, float x2, float y2) {
 
   strokeWeight(2);
   stroke(255,0,0);
-  // Set drawing matrix
-  pushMatrix();
-  translate(cx1 + radius, cy1 + radius);
-  rotate(angle);
-  float lineX = 0;
-  float lineY = 0;
-  line(lineX, lineY, len, 0);
-  beginShape(TRIANGLES);
-  vertex(len, 0); // point
-  vertex(len - triangleSize, -triangleSize);
-  vertex(len - triangleSize, triangleSize);
-  endShape();
-  popMatrix();
+  line(x1+radius, y1+radius, x2+radius, y2+radius);
+  // draw an ellipse at end of line
+  ellipse(x2+radius, y2+radius, 8, 8);
+  
+  // IGNORE THIS STUFF
+  //translate(triangleSize / 2, triangleSize / 2);
+  //triangle(x2+radius, y2+radius, x2+radius - triangleSize, y2+radius-triangleSize, x2+radius - triangleSize, y2+radius+triangleSize);
+  // Set origin to (0,0)
+  //pushMatrix();
+  // Set origin to next location
+  //translate(len/2, len/2);
+  // rotate triangle
+  //rotate(angle);
+  //triangle(len, 0, len - triangleSize, -triangleSize, len - triangleSize, triangleSize);
+  
+  //popMatrix();
+  //translate(cx1 + radius, cy1 + radius);
+  //rotate(angle);
+  //float lineX = 0;
+  //float lineY = 0;
+  //line(lineX, lineY, len, 0);
+  //pushMatrix();
+  ////translate(triangleSize / 2, triangleSize / 2);
+  //translate(x2-len, y2);
+  //rotate(angle);
+  ////translate(-buttonSize, -buttonSize);
+  //triangle(len, 0, len - triangleSize, -triangleSize, len - triangleSize, triangleSize);
+  ////vertex(x2+radius, y2+radius); // point
+  ////vertex(x2+radius - triangleSize, y2+radius-triangleSize);
+  ////vertex(x2+radius - triangleSize, y2+radius+triangleSize);
+  ////endShape();
+  //popMatrix();
   
 }
   
