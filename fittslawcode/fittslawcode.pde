@@ -24,6 +24,13 @@ float x1, y1, x2, y2; // points for current and next selection
 int mouseRow;
 
 int numRepeats = 1; //sets the number of times each button repeats in the test
+/*
+ * Participant IDs:
+ * Duncan: 1
+ * Amelia: 2
+ * Edward: 3
+ * Yoon:   4
+ */
 int participantID = 1; // EDIT FOR YOURSELF
 int previousMouseY = mouseY;
 int previousTime;
