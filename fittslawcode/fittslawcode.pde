@@ -5,6 +5,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 //when in doubt, consult the Processsing reference: https://processing.org/reference/
 
@@ -25,6 +27,8 @@ int numRepeats = 1; //sets the number of times each button repeats in the test
 int participantID = 1; // EDIT FOR YOURSELF
 int previousMouseY = mouseY;
 int previousTime;
+String filename = "Participant_" + participantID + ".csv";
+ArrayList<String> trialInformation = new ArrayList<String>();
 
 void setup()
 {
@@ -55,7 +59,39 @@ void setup()
   //System.out.println("trial order: " + trials);
   
   frame.setLocation(0,0); // put window in top left corner of screen (doesn't always work)
+  
+  // write a starter line for CSV
+  appendTextToFile("trial, id, initial mouseY, target center Y, target height, time taken, success");
 }
+
+
+// Thanks, StackOverflow. u da best.
+void appendTextToFile(String text){
+  File f = new File(dataPath(filename));
+  if(!f.exists()){
+    createFile(f);
+  }
+  try {
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
+    out.println(text);
+    out.close();
+  }catch (IOException e){
+      e.printStackTrace();
+  }
+}
+
+/**
+ * Creates a new file including all subfolders
+ */
+void createFile(File f){
+  File parentDir = f.getParentFile();
+  try{
+    parentDir.mkdirs(); 
+    f.createNewFile();
+  }catch(Exception e){
+    e.printStackTrace();
+  }
+} 
 
 
 void draw()
@@ -227,7 +263,9 @@ void keyPressed()
   //System.out.println(previousTime+","+millis());
   // print current data (trial number, participant id, initial mouseY, Y position of center of target, target height, time taken, success)
   //System.out.println("Target: "+target);
-  System.out.println(trialNum+","+participantID+","+previousMouseY+","+targetCenterY+","+buttonSize+","+time+","+success);
+  String trialInfo = trialNum+","+participantID+","+previousMouseY+","+targetCenterY+","+buttonSize+","+time+","+success;
+  //addInfoToFile(trialInfo);
+  appendTextToFile(trialInfo);
 
   trialNum++; //Increment trial number
   
