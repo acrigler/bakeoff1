@@ -67,19 +67,24 @@ void setup()
   
   frame.setLocation(0,0); // put window in top left corner of screen (doesn't always work)
   
-  // write a starter line for CSV
-  appendTextToFile("trial, id, initial mouseY, target center Y, target height, time taken, success");
+ 
 }
 
 
 // Thanks, StackOverflow. u da best.
 void appendTextToFile(String text){
   File f = new File(dataPath(filename));
+  boolean newfile = false;
   if(!f.exists()){
     createFile(f);
+    newfile = true;
   }
   try {
     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f, true)));
+     // write a starter line for CSV
+    if (newfile) {
+      appendTextToFile("trial, id, initial mouseY, target center Y, target height, time taken, success");
+    }
     out.println(text);
     out.close();
   }catch (IOException e){
@@ -270,10 +275,11 @@ void keyPressed()
   //System.out.println(previousTime+","+millis());
   // print current data (trial number, participant id, initial mouseY, Y position of center of target, target height, time taken, success)
   //System.out.println("Target: "+target);
-  String trialInfo = trialNum+","+participantID+","+previousMouseY+","+targetCenterY+","+buttonSize+","+time+","+success;
-  //addInfoToFile(trialInfo);
-  appendTextToFile(trialInfo);
-
+  if (success == 1) {
+    String trialInfo = trialNum+","+participantID+","+previousMouseY+","+targetCenterY+","+buttonSize+","+time+","+success;
+    //addInfoToFile(trialInfo);
+    appendTextToFile(trialInfo);
+  }
   trialNum++; //Increment trial number
   
   // update variables for next trial
